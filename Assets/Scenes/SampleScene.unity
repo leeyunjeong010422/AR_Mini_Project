@@ -820,7 +820,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bf39b152ad897d4fb637b9975f42592, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SpawnObject: {fileID: 6313159557967848747, guid: eabc4d1357cd57e4bb8412c27c74da6a, type: 3}
+  SpawnObject: {fileID: 3159585687935454231, guid: b763e02cf970b6e4186ad8691876041c, type: 3}
   xPos: 0
   zPos: 0
   enemyCount: 0
