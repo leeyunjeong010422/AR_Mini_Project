@@ -3,9 +3,9 @@ using UnityEngine;
 
 public class GunController : MonoBehaviour
 {
-    public Camera arCamera;     
-    public float range = 100f; 
-    public float damage = 10f; 
+    [SerializeField] Camera arCamera;
+    [SerializeField] float range = 100f;
+    [SerializeField] float damage = 10f; 
 
     public AudioSource gunsound; 
 
@@ -16,9 +16,9 @@ public class GunController : MonoBehaviour
     {
         RaycastHit hit; 
         if (Physics.Raycast(arCamera.transform.position, arCamera.transform.forward, out hit, range))
-        { 
+        {
 
-            EnemyController enemy = hit.transform.GetComponent<EnemyController>();
+            EnemyHPController enemy = hit.transform.GetComponent<EnemyHPController>();
 
             if (enemy != null)  
             {

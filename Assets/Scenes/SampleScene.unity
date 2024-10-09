@@ -147,7 +147,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 420302838}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.646, y: 2.041, z: 0}
+  m_LocalPosition: {x: -2.861, y: 2.041, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -171,7 +171,7 @@ MonoBehaviour:
   damage: 10
   gunsound: {fileID: 856082687}
   muzzleFlash: {fileID: 198792769130808804, guid: 4543ab5e3d405ec40a8d4e9aa5165030, type: 3}
-  impactEffect: {fileID: 1336949550903370, guid: 4543ab5e3d405ec40a8d4e9aa5165030, type: 3}
+  impactEffect: {fileID: 2968086976426280351, guid: 258fb097abe30714ea0277d5fcf000c4, type: 3}
 --- !u!1 &491385796
 GameObject:
   m_ObjectHideFlags: 0
@@ -593,7 +593,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2214441959812684827, guid: 2dc87aa98b82fc1408c4daecb0319e59, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.02
+      value: 1.63
       objectReference: {fileID: 0}
     - target: {fileID: 2214441959812684827, guid: 2dc87aa98b82fc1408c4daecb0319e59, type: 3}
       propertyPath: m_LocalPosition.y
@@ -802,7 +802,7 @@ GameObject:
   - component: {fileID: 1665782444}
   - component: {fileID: 1665782443}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: RandomMake
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -820,9 +820,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bf39b152ad897d4fb637b9975f42592, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SpawnObject: {fileID: 3159585687935454231, guid: b763e02cf970b6e4186ad8691876041c, type: 3}
-  xPos: 0
-  zPos: 0
+  birds:
+  - {fileID: 3159585687935454231, guid: b763e02cf970b6e4186ad8691876041c, type: 3}
+  - {fileID: 9169504899107259627, guid: f9c1f876ff03b6f4f9ca5da143a931e7, type: 3}
+  - {fileID: 5727083192917185025, guid: 426efb339ae30c34aa519383ffbb18a7, type: 3}
+  - {fileID: 6570019644287737143, guid: 248da33e1803c834d9277b2b8d5ccddc, type: 3}
+  - {fileID: 7481659750879289291, guid: 08e54fd2663d7fd41898b70720c9e37e, type: 3}
+  - {fileID: 7701237014810171585, guid: d9de890dc1af07a49ba722f50c2508b4, type: 3}
   enemyCount: 0
 --- !u!4 &1665782444
 Transform:
@@ -876,7 +880,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -45.1, y: 59.5}
+  m_AnchoredPosition: {x: -45.1, y: 269.63}
   m_SizeDelta: {x: 160, y: 79.76}
   m_Pivot: {x: 1, y: 0}
 --- !u!114 &1742189108

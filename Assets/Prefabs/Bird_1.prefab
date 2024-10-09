@@ -328,6 +328,7 @@ GameObject:
   - component: {fileID: 3159585687928078279}
   - component: {fileID: 173261220893763973}
   - component: {fileID: 5635310552386435428}
+  - component: {fileID: 3869908021613606669}
   m_Layer: 0
   m_Name: Bird_1
   m_TagString: Untagged
@@ -401,3 +402,18 @@ CapsuleCollider:
   m_Height: 1.8967485
   m_Direction: 2
   m_Center: {x: -0.02, y: 0.84, z: -0.01}
+--- !u!114 &3869908021613606669
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3159585687935454231}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ae05ec53f6369b45a1c3cd3e483116a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 2
+  moveRangeX: 10
+  moveRangeZ: 10

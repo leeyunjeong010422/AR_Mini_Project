@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7701237014800689925}
   - component: {fileID: 7701237014800689927}
   - component: {fileID: 7701237014800689926}
+  - component: {fileID: -3222415531987200129}
   m_Layer: 0
   m_Name: Bird_6
   m_TagString: Untagged
@@ -85,6 +86,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 20
   isEneymyDead: 0
+--- !u!114 &-3222415531987200129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7701237014810171585}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ae05ec53f6369b45a1c3cd3e483116a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 2
+  moveRangeX: 10
+  moveRangeZ: 10
 --- !u!1 &7701237014810171589
 GameObject:
   m_ObjectHideFlags: 0

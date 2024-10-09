@@ -1,9 +1,9 @@
 using UnityEngine;
 
-public class EnemyController : MonoBehaviour
+public class EnemyHPController : MonoBehaviour
 {
-    public float health = 20f;
-    public bool isEneymyDead;
+    [SerializeField] float health = 10f;
+    [SerializeField] bool isEneymyDead;
 
     public void GetDamage(float damageAmount)
     {
@@ -13,7 +13,7 @@ public class EnemyController : MonoBehaviour
 
             if (health <= 0)
             {
-                Destroy(this.gameObject, 0.5f);
+                Destroy(this.gameObject);
             }
         }
     }
