@@ -185,7 +185,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 20
-  isEneymyDead: 0
+  isEnemyDead: 0
+  enemyType: 5
 --- !u!114 &-3564786295326605271
 MonoBehaviour:
   m_ObjectHideFlags: 0

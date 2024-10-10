@@ -30,8 +30,8 @@ public class SpawnController : MonoBehaviour
         if (bird != null)
         {
             //랜덤으로 생성될 위치와 회전값 설정
-            int xPos = Random.Range(-10, 10);
-            int zPos = Random.Range(6, 20);
+            int xPos = Random.Range(-20, 20);
+            int zPos = Random.Range(7, 25);
             float randomRotationY = (Random.Range(0, 2) == 0) ? 90f : -90f; //오른쪽을 볼 건지 왼쪽을 볼 건지 (회전값 Y축)
 
             //위에 설정한 값을 가지고 랜덤으로 위치와 회전을 결정하여 적을 활성화시킴

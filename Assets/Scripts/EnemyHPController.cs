@@ -8,6 +8,8 @@ public class EnemyHPController : MonoBehaviour
 
     private SpawnController spawnController;
 
+    [SerializeField] int enemyType;
+
     private void Start()
     {
         spawnController = FindObjectOfType<SpawnController>();
@@ -24,11 +26,34 @@ public class EnemyHPController : MonoBehaviour
             if (health <= 0)
             {
                 isEnemyDead = true;
+
+                AddScoreBasedOnType();
+
                 spawnController.ReturnBirdToPool(gameObject); //적이 죽었으면 풀로 반환
             }
         }
     }
-    
+
+    private void AddScoreBasedOnType()
+    {
+        int points = 0;
+
+        if (enemyType == 1 || enemyType == 2)
+        {
+            points = 5;
+        }
+        else if (enemyType == 3 || enemyType == 4)
+        {
+            points = 7;
+        }
+        else if (enemyType == 5 || enemyType == 6)
+        {
+            points = 10;
+        }
+
+        ScoreManager.instance.AddScore(points);
+    }
+
     //적이 다시 풀링되었을 때 상태 초기화
     public void ResetBird()
     {
