@@ -7,49 +7,62 @@ public class EnemyMover : MonoBehaviour
     [SerializeField] float speed = 2f;
     [SerializeField] float moveRangeX = 10f;
     [SerializeField] float moveRangeZ = 10f;
-    private Vector3 startPos;
-    private Vector3 targetPos;
+    private Vector3 startPos; //초기 위치
+    private Vector3 targetPos; //이동할 목표 위치
     private bool moveRight;
 
-    void Start()
+    private void Start()
     {
-        startPos = transform.position;
+        startPos = transform.position; //초기 위치 저장
 
+        //적의 초기 회전값에 따라 이동 방향 설정
         if (transform.rotation.eulerAngles.y == 90f)
         {
+            //오른쪽으로 이동
             moveRight = true;
         }
         else if (transform.rotation.eulerAngles.y == -90f)
         {
+            //왼쪽으로 이동
             moveRight = false;
         }
 
         SetRandomTargetPosition();
     }
 
-    void Update()
+    private void Update()
     {
+        //적을 목표 위치로 이동시킴
         transform.position = Vector3.MoveTowards(transform.position, targetPos, speed * Time.deltaTime);
 
+        //만약에 목표 위치에 다왔다면 새로운 랜덤 목표 위치를 설정함
         if (Vector3.Distance(transform.position, targetPos) < 0.1f)
         {
             SetRandomTargetPosition();
         }
     }
 
-    void SetRandomTargetPosition()
+    //랜덤 목표 위치 설정
+    private void SetRandomTargetPosition()
     {
         float randomX;
+
         if (moveRight)
         {
+            //적이 오른쪽으로 이동 중이라면
+            //시작위치부터 이동 가능 범위 중에서 랜덤으로 선택
             randomX = Random.Range(startPos.x, startPos.x + moveRangeX);
         }
         else
         {
+            //왼쪽으로 이동 중이라면
+            //반대로 끝부터 시작위치까지 랜덤으로 선택
             randomX = Random.Range(startPos.x - moveRangeX, startPos.x);
         }
 
+        //Z축 이동 좌표도 랜덤 설정
         float randomZ = Random.Range(startPos.z - moveRangeZ, startPos.z + moveRangeZ);
+        //Y축은 처음 시작한 위치 그대로
         targetPos = new Vector3(randomX, startPos.y, randomZ);
     }
 }
