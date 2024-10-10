@@ -1,34 +1,47 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Pool;
 
 public class SpawnController : MonoBehaviour
 {
-    [SerializeField] GameObject[] birds;
-    [SerializeField] int enemyCount;
+    [SerializeField] EnemyPool pool;
+    [SerializeField] int enemyCount = 10;
+    private int currentEnemyCount;
 
-    void Start()
+    private void Start()
     {
         StartCoroutine(StartSpawning());
     }
 
-    IEnumerator StartSpawning()
+    private IEnumerator StartSpawning()
     {
-        while (enemyCount < 10)
+        while (currentEnemyCount < enemyCount)
+        {
+            SpawnBird();
+            yield return new WaitForSeconds(2f);
+        }
+    }
+
+    private void SpawnBird()
+    {
+        GameObject bird = pool.GetPooledObject();
+        if (bird != null)
         {
             int xPos = Random.Range(-10, 10);
             int zPos = Random.Range(6, 20);
-
-            int randomBirdIndex = Random.Range(0, birds.Length);
-            GameObject randomBird = birds[randomBirdIndex];
-
-            //90도 또는 -90도 중 하나의 값을 랜덤으로 선택
             float randomRotationY = (Random.Range(0, 2) == 0) ? 90f : -90f;
-            Quaternion birdRotation = Quaternion.Euler(0, randomRotationY, 0);
 
-            Instantiate(randomBird, new Vector3(xPos, Random.Range(-1, 1), zPos), birdRotation);
+            bird.transform.position = new Vector3(xPos, Random.Range(-1, 1), zPos);
+            bird.transform.rotation = Quaternion.Euler(0, randomRotationY, 0);
+            bird.SetActive(true);
 
-            yield return new WaitForSeconds(2);
-            enemyCount += 1;
+            currentEnemyCount++;
         }
+    }
+
+    public void ReturnBirdToPool(GameObject bird)
+    {
+        bird.SetActive(false);
+        currentEnemyCount--;
     }
 }
