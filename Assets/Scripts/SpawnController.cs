@@ -19,7 +19,7 @@ public class SpawnController : MonoBehaviour
         while (currentEnemyCount <= enemyCount)
         {
             SpawnBird();
-            yield return new WaitForSeconds(2f); //n段原陥 持失
+            yield return new WaitForSeconds(1f); //n段原陥 持失
         }
     }
 

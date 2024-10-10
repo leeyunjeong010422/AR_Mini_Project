@@ -34,6 +34,7 @@ public class EnemyHPController : MonoBehaviour
         }
     }
 
+    //타입(유형)에 따라 점수 증가
     private void AddScoreBasedOnType()
     {
         int points = 0;

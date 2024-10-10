@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class EnemyMover : MonoBehaviour
 {
-    [SerializeField] float speed = 2f;
-    [SerializeField] float moveRangeX = 10f;
-    [SerializeField] float moveRangeZ = 10f;
+    [SerializeField] float moveRangeX = 20f;
+    [SerializeField] float moveRangeZ = 20f;
+    private float speed;
     private Vector3 startPos; //초기 위치
     private Vector3 targetPos; //이동할 목표 위치
     private bool moveRight;
@@ -32,6 +32,17 @@ public class EnemyMover : MonoBehaviour
 
     private void Update()
     {
+        //목표 위치로 향하는 방향 계산
+        Vector3 direction = (targetPos - transform.position).normalized;
+
+        //적이 해당 방향을 바라보게 회전
+        if (direction != Vector3.zero) //회전할 방향이 존재하는지 확인
+        {
+            Quaternion lookRotation = Quaternion.LookRotation(direction);
+            
+            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
+        }
+
         //적을 목표 위치로 이동시킴
         transform.position = Vector3.MoveTowards(transform.position, targetPos, speed * Time.deltaTime);
 
@@ -64,5 +75,8 @@ public class EnemyMover : MonoBehaviour
         float randomZ = Random.Range(startPos.z - moveRangeZ, startPos.z + moveRangeZ);
         //Y축은 처음 시작한 위치 그대로
         targetPos = new Vector3(randomX, startPos.y, randomZ);
+
+        //몬스터 움직임 속도 랜덤 선택
+        speed = Random.Range(2f, 8f);
     }
 }
