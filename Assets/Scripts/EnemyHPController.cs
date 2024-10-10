@@ -52,7 +52,7 @@ public class EnemyHPController : MonoBehaviour
             points = 10;
         }
 
-        ScoreManager.instance.AddScore(points);
+        GameManager.instance.AddScore(points);
     }
 
     //적이 다시 풀링되었을 때 상태 초기화
