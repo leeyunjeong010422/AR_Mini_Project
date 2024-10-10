@@ -759,7 +759,7 @@ MonoBehaviour:
   - {fileID: 6570019644287737143, guid: 248da33e1803c834d9277b2b8d5ccddc, type: 3}
   - {fileID: 7481659750879289291, guid: 08e54fd2663d7fd41898b70720c9e37e, type: 3}
   - {fileID: 7701237014810171585, guid: d9de890dc1af07a49ba722f50c2508b4, type: 3}
-  poolSize: 10
+  poolSize: 20
   pool: []
 --- !u!4 &1126455322
 Transform:
@@ -874,7 +874,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pool: {fileID: 1126455321}
-  enemyCount: 10
+  enemyCount: 20
 --- !u!4 &1665782444
 Transform:
   m_ObjectHideFlags: 0

@@ -5,7 +5,7 @@ using UnityEngine.Pool;
 public class SpawnController : MonoBehaviour
 {
     [SerializeField] EnemyPool pool;
-    [SerializeField] int enemyCount = 10;
+    [SerializeField] int enemyCount = 20;
     private int currentEnemyCount;
 
     private void Start()
@@ -15,7 +15,7 @@ public class SpawnController : MonoBehaviour
 
     private IEnumerator StartSpawning()
     {
-        while (currentEnemyCount < enemyCount)
+        while (currentEnemyCount <= enemyCount)
         {
             SpawnBird();
             yield return new WaitForSeconds(2f);

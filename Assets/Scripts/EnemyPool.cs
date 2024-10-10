@@ -4,7 +4,7 @@ using UnityEngine;
 public class EnemyPool : MonoBehaviour
 {
     [SerializeField] GameObject[] birdPrefabs;
-    [SerializeField] int poolSize = 10;
+    [SerializeField] int poolSize = 20;
 
     [SerializeField] private List<GameObject> pool;
 
@@ -27,6 +27,7 @@ public class EnemyPool : MonoBehaviour
         {
             if (!bird.activeInHierarchy)
             {
+                bird.GetComponent<EnemyHPController>().ResetBird();
                 return bird;
             }
         }

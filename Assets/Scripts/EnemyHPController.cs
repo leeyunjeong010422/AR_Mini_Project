@@ -2,8 +2,7 @@ using UnityEngine;
 
 public class EnemyHPController : MonoBehaviour
 {
-    [SerializeField] float maxHealth = 10f;
-    private float health;
+    [SerializeField] float health = 10f;
     [SerializeField] bool isEnemyDead = false;
 
     private SpawnController spawnController;
@@ -11,7 +10,6 @@ public class EnemyHPController : MonoBehaviour
     void Start()
     {
         spawnController = FindObjectOfType<SpawnController>();
-        ResetEnemy();
     }
 
     public void GetDamage(float damageAmount)
@@ -27,10 +25,9 @@ public class EnemyHPController : MonoBehaviour
             }
         }
     }
-
-    public void ResetEnemy()
+    public void ResetBird()
     {
-        health = maxHealth;
+        health = 10f;
         isEnemyDead = false;
     }
 }
