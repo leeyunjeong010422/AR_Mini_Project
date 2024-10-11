@@ -9,11 +9,13 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     [SerializeField] TextMeshProUGUI scoreText;
     [SerializeField] TextMeshProUGUI timerText;
+    [SerializeField] TextMeshProUGUI bestScoreText;
     [SerializeField] GameObject gameOverUI;
     [SerializeField] Button retryButton;
     [SerializeField] Button exitButton;
 
     private int score = 0;
+    private int bestScore = 0;
     private float timeRemaining = 10f;
 
     private void Awake()
@@ -27,6 +29,9 @@ public class GameManager : MonoBehaviour
 
         retryButton.onClick.AddListener(RestartGame);
         exitButton.onClick.AddListener(ExitGame);
+
+        bestScore = PlayerPrefs.GetInt("BestScore", 0);
+        bestScoreText.text = "Best Score: " + bestScore.ToString();
     }
 
     private void Start()
@@ -56,6 +61,13 @@ public class GameManager : MonoBehaviour
     {
         gameOverUI.SetActive(true);
         Time.timeScale = 0f;
+
+        if (score > bestScore)
+        {
+            bestScore = score;
+            PlayerPrefs.SetInt("BestScore", bestScore); //새로운 최고 기록 저장
+            bestScoreText.text = "Best Score: " + bestScore.ToString(); //최고 점수 텍스트 갱신
+        }
     }
 
     private void RestartGame()
