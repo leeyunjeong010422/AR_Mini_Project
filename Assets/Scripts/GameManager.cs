@@ -12,7 +12,12 @@ public class GameManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI bestScoreText;
     [SerializeField] GameObject gameOverUI;
     [SerializeField] Button retryButton;
+    [SerializeField] Button retry1Button;
     [SerializeField] Button exitButton;
+    [SerializeField] Button exit1Button;
+    [SerializeField] Button backButton;
+    [SerializeField] GameObject stopGameUI;
+    [SerializeField] Button stopButton;
 
     private int score = 0;
     private int bestScore = 0;
@@ -26,9 +31,14 @@ public class GameManager : MonoBehaviour
         }
 
         gameOverUI.SetActive(false);
+        stopGameUI.SetActive(false);
 
         retryButton.onClick.AddListener(RestartGame);
+        retry1Button.onClick.AddListener(RestartGame);
         exitButton.onClick.AddListener(ExitGame);
+        exit1Button.onClick.AddListener(ExitGame);
+        backButton.onClick.AddListener(StartGame);
+        stopButton.onClick.AddListener(StopGame);
 
         bestScore = PlayerPrefs.GetInt("BestScore", 0);
         bestScoreText.text = "Best Score: " + bestScore.ToString();
@@ -79,5 +89,25 @@ public class GameManager : MonoBehaviour
     private void ExitGame()
     {
         Application.Quit();
+    }
+
+    private void StopGame()
+    {
+        if (stopGameUI.activeSelf)
+        {
+            stopGameUI.SetActive(false);
+            Time.timeScale = 1f;
+        }
+        else
+        {
+            stopGameUI.SetActive(true);
+            Time.timeScale = 0f;
+        }
+    }
+
+    private void StartGame()
+    {
+        Time.timeScale = 1f;
+        stopGameUI.SetActive(false);
     }
 }
