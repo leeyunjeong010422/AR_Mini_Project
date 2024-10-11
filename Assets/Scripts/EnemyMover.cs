@@ -62,17 +62,17 @@ public class EnemyMover : MonoBehaviour
         {
             //적이 오른쪽으로 이동 중이라면
             //시작위치부터 이동 가능 범위 중에서 랜덤으로 선택
-            randomX = Random.Range(startPos.x, startPos.x + moveRangeX);
+            randomX = Random.Range(startPos.x + 7f, startPos.x + moveRangeX);
         }
         else
         {
             //왼쪽으로 이동 중이라면
             //반대로 끝부터 시작위치까지 랜덤으로 선택
-            randomX = Random.Range(startPos.x - moveRangeX, startPos.x);
+            randomX = Random.Range(startPos.x - moveRangeX, startPos.x - 7f);
         }
 
         //Z축 이동 좌표도 랜덤 설정
-        float randomZ = Random.Range(startPos.z - moveRangeZ, startPos.z + moveRangeZ);
+        float randomZ = Random.Range(startPos.z + 7f - moveRangeZ, startPos.z + 7f + moveRangeZ);
         //Y축은 처음 시작한 위치 그대로
         targetPos = new Vector3(randomX, startPos.y, randomZ);
 
