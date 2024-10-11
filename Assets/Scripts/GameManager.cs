@@ -1,8 +1,8 @@
-using System.Collections;
 using UnityEngine;
-using TMPro;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
+using System.Collections;
 
 public class GameManager : MonoBehaviour
 {
@@ -17,11 +17,16 @@ public class GameManager : MonoBehaviour
     [SerializeField] Button exit1Button;
     [SerializeField] Button backButton;
     [SerializeField] GameObject stopGameUI;
-    [SerializeField] Button stopButton;
+    
+    [SerializeField] Button toggleButton;
+    [SerializeField] Sprite stopSprite;
+    [SerializeField] Sprite startSprite;
+    [SerializeField] Image buttonImage;
 
     private int score = 0;
     private int bestScore = 0;
     private float timeRemaining = 10f;
+    private bool isStopped = false;
 
     private void Awake()
     {
@@ -38,7 +43,7 @@ public class GameManager : MonoBehaviour
         exitButton.onClick.AddListener(ExitGame);
         exit1Button.onClick.AddListener(ExitGame);
         backButton.onClick.AddListener(StartGame);
-        stopButton.onClick.AddListener(StopGame);
+        toggleButton.onClick.AddListener(ToggleGame);
 
         bestScore = PlayerPrefs.GetInt("BestScore", 0);
         bestScoreText.text = "Best Score: " + bestScore.ToString();
@@ -75,8 +80,8 @@ public class GameManager : MonoBehaviour
         if (score > bestScore)
         {
             bestScore = score;
-            PlayerPrefs.SetInt("BestScore", bestScore); //새로운 최고 기록 저장
-            bestScoreText.text = "Best Score: " + bestScore.ToString(); //최고 점수 텍스트 갱신
+            PlayerPrefs.SetInt("BestScore", bestScore);
+            bestScoreText.text = "Best Score: " + bestScore.ToString();
         }
     }
 
@@ -91,23 +96,31 @@ public class GameManager : MonoBehaviour
         Application.Quit();
     }
 
-    private void StopGame()
+    private void ToggleGame()
     {
-        if (stopGameUI.activeSelf)
+        if (isStopped)
         {
-            stopGameUI.SetActive(false);
-            Time.timeScale = 1f;
+            StartGame();
         }
         else
         {
-            stopGameUI.SetActive(true);
-            Time.timeScale = 0f;
+            StopGame();
         }
+    }
+
+    private void StopGame()
+    {
+        stopGameUI.SetActive(true);
+        Time.timeScale = 0f;
+        isStopped = true;
+        buttonImage.sprite = startSprite;
     }
 
     private void StartGame()
     {
-        Time.timeScale = 1f;
         stopGameUI.SetActive(false);
+        Time.timeScale = 1f;
+        isStopped = false;
+        buttonImage.sprite = stopSprite;
     }
 }
