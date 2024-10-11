@@ -5,15 +5,32 @@ public class GunController : MonoBehaviour
 {
     [SerializeField] Camera arCamera;
     [SerializeField] float range = 100f;
-    [SerializeField] float damage = 10f; 
+    [SerializeField] float damage = 10f;
+
+    [SerializeField] int maxAmmo = 10; //최대 총알 수
+
+    private int currentAmmo;
+    private bool isReloading = false;
 
     public AudioSource gunsound; 
 
     public ParticleSystem muzzleFlash; //총구에서 나오는 파티클
     public GameObject impactEffect; //적을 맞췄을 때 적에게 나타나는 이펙트
 
+    private void Start()
+    {
+        currentAmmo = maxAmmo;
+        UIManager.instance.UpdateAmmoText(currentAmmo, maxAmmo);
+    }
+
     public void shoot()
     {
+        //장전 중이거나 총알이 없으면 발사하지 않음
+        if (isReloading || currentAmmo <= 0)
+        {
+            return;
+        }
+
         RaycastHit hit; 
         if (Physics.Raycast(arCamera.transform.position, arCamera.transform.forward, out hit, range))
         {
@@ -28,7 +45,10 @@ public class GunController : MonoBehaviour
 
         }
         gunsound.Play(); 
-        StartCoroutine(OnMuzzleFlashEffect()); 
+        StartCoroutine(OnMuzzleFlashEffect());
+
+        currentAmmo--;
+        UIManager.instance.UpdateAmmoText(currentAmmo, maxAmmo);
     }
 
     //총구에 파티클 효과 재생 코루틴
@@ -37,5 +57,22 @@ public class GunController : MonoBehaviour
         muzzleFlash.Play();
         yield return new WaitForSeconds(0.2f); 
         muzzleFlash.Stop();
+    }
+
+    public void Reload()
+    {
+        if (!isReloading && currentAmmo < maxAmmo)
+        {
+            StartCoroutine(ReloadCoroutine());
+        }
+    }
+
+    private IEnumerator ReloadCoroutine()
+    {
+        isReloading = true;
+        yield return new WaitForSeconds(2f); //장전 시간 2초
+        currentAmmo = maxAmmo;
+        UIManager.instance.UpdateAmmoText(currentAmmo, maxAmmo);
+        isReloading = false;
     }
 }

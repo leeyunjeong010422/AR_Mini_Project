@@ -1,27 +1,11 @@
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using TMPro;
 using System.Collections;
+using Michsky.UI.ModernUIPack;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-    [SerializeField] TextMeshProUGUI scoreText;
-    [SerializeField] TextMeshProUGUI timerText;
-    [SerializeField] TextMeshProUGUI bestScoreText;
-    [SerializeField] GameObject gameOverUI;
-    [SerializeField] Button retryButton;
-    [SerializeField] Button retry1Button;
-    [SerializeField] Button exitButton;
-    [SerializeField] Button exit1Button;
-    [SerializeField] Button backButton;
-    [SerializeField] GameObject stopGameUI;
-    
-    [SerializeField] Button toggleButton;
-    [SerializeField] Sprite stopSprite;
-    [SerializeField] Sprite startSprite;
-    [SerializeField] Image buttonImage;
 
     private int score = 0;
     private int bestScore = 0;
@@ -35,18 +19,7 @@ public class GameManager : MonoBehaviour
             instance = this;
         }
 
-        gameOverUI.SetActive(false);
-        stopGameUI.SetActive(false);
-
-        retryButton.onClick.AddListener(RestartGame);
-        retry1Button.onClick.AddListener(RestartGame);
-        exitButton.onClick.AddListener(ExitGame);
-        exit1Button.onClick.AddListener(ExitGame);
-        backButton.onClick.AddListener(StartGame);
-        toggleButton.onClick.AddListener(ToggleGame);
-
         bestScore = PlayerPrefs.GetInt("BestScore", 0);
-        bestScoreText.text = "Best Score: " + bestScore.ToString();
     }
 
     private void Start()
@@ -57,14 +30,14 @@ public class GameManager : MonoBehaviour
     public void AddScore(int points)
     {
         score += points;
-        scoreText.text = "Score: " + score.ToString();
+        UIManager.instance.UpdateScoreText(score);  //점수 갱신
     }
 
     private IEnumerator GameTimer()
     {
         while (timeRemaining >= 0)
         {
-            timerText.text = "Time: " + Mathf.Ceil(timeRemaining).ToString();
+            UIManager.instance.UpdateTimerText(timeRemaining);  //남은 시간 갱신
             timeRemaining -= Time.deltaTime;
             yield return null;
         }
@@ -74,29 +47,29 @@ public class GameManager : MonoBehaviour
 
     private void EndGame()
     {
-        gameOverUI.SetActive(true);
+        UIManager.instance.ShowGameOverUI();  //게임 오버 표시
         Time.timeScale = 0f;
 
         if (score > bestScore)
         {
             bestScore = score;
             PlayerPrefs.SetInt("BestScore", bestScore);
-            bestScoreText.text = "Best Score: " + bestScore.ToString();
+            UIManager.instance.UpdateBestScoreText(bestScore);  //최고 점수 갱신
         }
     }
 
-    private void RestartGame()
+    public void RestartGame()
     {
         Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
-    private void ExitGame()
+    public void ExitGame()
     {
         Application.Quit();
     }
 
-    private void ToggleGame()
+    public void ToggleGame()
     {
         if (isStopped)
         {
@@ -110,17 +83,15 @@ public class GameManager : MonoBehaviour
 
     private void StopGame()
     {
-        stopGameUI.SetActive(true);
         Time.timeScale = 0f;
         isStopped = true;
-        buttonImage.sprite = startSprite;
+        UIManager.instance.SetGamePaused(true);  //게임 일시정지 상태 표시
     }
 
     private void StartGame()
     {
-        stopGameUI.SetActive(false);
         Time.timeScale = 1f;
         isStopped = false;
-        buttonImage.sprite = stopSprite;
+        UIManager.instance.SetGamePaused(false);  //게임 재개 상태 표시
     }
 }
