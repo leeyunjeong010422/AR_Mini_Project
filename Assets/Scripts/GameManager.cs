@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        SoundManager.Instance.SetStartBGM();
         StartCoroutine(GameTimer());
     }
 
@@ -47,6 +48,7 @@ public class GameManager : MonoBehaviour
 
     private void EndGame()
     {
+        SoundManager.Instance.StopBGM();
         UIManager.instance.ShowGameOverUI();  //게임 오버 표시
         Time.timeScale = 0f;
 
@@ -60,12 +62,14 @@ public class GameManager : MonoBehaviour
 
     public void RestartGame()
     {
+        SoundManager.Instance.PlayMouseClickSound();
         Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void ExitGame()
     {
+        SoundManager.Instance.PlayMouseClickSound();
         Application.Quit();
     }
 
@@ -81,15 +85,17 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void StopGame()
+    public void StopGame()
     {
+        SoundManager.Instance.PlayMouseClickSound();
         Time.timeScale = 0f;
         isStopped = true;
         UIManager.instance.SetGamePaused(true);  //게임 일시정지 상태 표시
     }
 
-    private void StartGame()
+    public void StartGame()
     {
+        SoundManager.Instance.PlayMouseClickSound();
         Time.timeScale = 1f;
         isStopped = false;
         UIManager.instance.SetGamePaused(false);  //게임 재개 상태 표시

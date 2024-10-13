@@ -14,6 +14,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject gameOverUI;
     [SerializeField] GameObject stopGameUI;
 
+    [SerializeField] Button backButton;
     [SerializeField] Button retryButton;
     [SerializeField] Button retry1Button;
     [SerializeField] Button exitButton;
@@ -34,6 +35,7 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
+        backButton.onClick.AddListener(() => GameManager.instance.StartGame());
         retryButton.onClick.AddListener(() => GameManager.instance.RestartGame());
         retry1Button.onClick.AddListener(() => GameManager.instance.RestartGame());
         exitButton.onClick.AddListener(() => GameManager.instance.ExitGame());
@@ -64,6 +66,7 @@ public class UIManager : MonoBehaviour
 
     public void ShowGameOverUI()
     {
+        SoundManager.Instance.PlayGameOverSound();
         gameOverUI.SetActive(true);
     }
 

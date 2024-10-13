@@ -69,8 +69,9 @@ public class GunController : MonoBehaviour
 
     private IEnumerator ReloadCoroutine()
     {
+        SoundManager.Instance.PlayReloadSound();
         isReloading = true;
-        yield return new WaitForSeconds(2f); //장전 시간 2초
+        yield return new WaitForSeconds(1.5f); //장전 시간 2초
         currentAmmo = maxAmmo;
         UIManager.instance.UpdateAmmoText(currentAmmo, maxAmmo);
         isReloading = false;

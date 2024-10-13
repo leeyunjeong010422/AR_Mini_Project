@@ -21,6 +21,7 @@ public class EnemyHPController : MonoBehaviour
         //적이 죽어있지 않는다면
         if (!isEnemyDead)
         {
+            SoundManager.Instance.PlayBirdDieSound();
             health -= damageAmount; //데미지를 입음 (-health)
 
             if (health <= 0)
