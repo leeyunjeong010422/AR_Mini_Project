@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
 
     private int score = 0;
     private int bestScore = 0;
-    private float timeRemaining = 10f;
+    private float timeRemaining = 60f;
     private bool isStopped = false;
 
     private void Awake()
@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
         if (instance == null)
         {
             instance = this;
+            DontDestroyOnLoad(gameObject);
         }
 
         bestScore = PlayerPrefs.GetInt("BestScore", 0);
@@ -87,6 +88,7 @@ public class GameManager : MonoBehaviour
 
     public void StopGame()
     {
+        SoundManager.Instance.StopBGM();
         SoundManager.Instance.PlayMouseClickSound();
         Time.timeScale = 0f;
         isStopped = true;
@@ -95,6 +97,7 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()
     {
+        SoundManager.Instance.SetStartBGM();
         SoundManager.Instance.PlayMouseClickSound();
         Time.timeScale = 1f;
         isStopped = false;

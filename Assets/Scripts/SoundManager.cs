@@ -36,9 +36,9 @@ public class SoundManager : MonoBehaviour
 
     public void PlayBGM(AudioSource bgm)
     {
+        bgm.time = previousTime;
         bgm.loop = true;
         bgm.Play();
-        previousTime = 0f;
     }
 
     public void StopBGM()
