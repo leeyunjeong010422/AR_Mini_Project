@@ -17,6 +17,7 @@ public class EnemyPool : MonoBehaviour
         {
             int randomIndex = Random.Range(0, birdPrefabs.Length); //추가한 종류 배열에서 랜덤으로 선택
             GameObject bird = Instantiate(birdPrefabs[randomIndex]);
+            bird.transform.parent = transform;
             bird.SetActive(false);
             pool.Add(bird);
         }

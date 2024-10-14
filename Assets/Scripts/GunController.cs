@@ -55,7 +55,7 @@ public class GunController : MonoBehaviour
     public IEnumerator OnMuzzleFlashEffect()
     {
         muzzleFlash.Play();
-        yield return new WaitForSeconds(0.2f); 
+        yield return new WaitForSeconds(2f); 
         muzzleFlash.Stop();
     }
 
@@ -71,7 +71,7 @@ public class GunController : MonoBehaviour
     {
         SoundManager.Instance.PlayReloadSound();
         isReloading = true;
-        yield return new WaitForSeconds(1.5f); //장전 시간 2초
+        yield return new WaitForSeconds(1.3f);
         currentAmmo = maxAmmo;
         UIManager.instance.UpdateAmmoText(currentAmmo, maxAmmo);
         isReloading = false;
